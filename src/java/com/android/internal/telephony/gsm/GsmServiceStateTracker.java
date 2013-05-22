@@ -689,6 +689,11 @@ final class GsmServiceStateTracker extends ServiceStateTracker {
                     int dataRegState = regCodeToServiceState(regState);
                     mNewSS.setDataRegState(dataRegState);
                     mDataRoaming = regCodeIsRoaming(regState);
+                    if (type == ServiceState.RIL_RADIO_TECHNOLOGY_GPRS
+                            && SystemProperties.get("persist.sys.report_gprs_as_edge",
+                            "0").equals("1")) {
+                        type = ServiceState.RIL_RADIO_TECHNOLOGY_EDGE;
+                    }
                     mNewSS.setRilDataRadioTechnology(type);
                     if (DBG) {
                         log("handlPollStateResultMessage: GsmSST setDataRegState=" + dataRegState
