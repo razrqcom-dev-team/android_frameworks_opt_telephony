@@ -215,11 +215,11 @@ public class SIMRecords extends IccRecords {
 
     protected void resetRecords() {
         mImsi = null;
-        mMsisdn = null;
+        mMsisdn = SystemProperties.get("persist.radio.msisdn", null);
         mVoiceMailNum = null;
         mCountVoiceMessages = 0;
         mMncLength = UNINITIALIZED;
-        mIccId = null;
+        mIccId = SystemProperties.get("persist.radio.iccid", null);
         // -1 means no EF_SPN found; treat accordingly.
         mSpnDisplayCondition = -1;
         mEfMWIS = null;
